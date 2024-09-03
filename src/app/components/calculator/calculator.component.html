@@ -1,41 +1,66 @@
 <div class="container mt-5">
-  <div class="calculator card">
-    <div class="card-body">
-      <input type="text" class="form-control mb-3 text-right" readonly />
-      
-      <div class="row">
-        <button class="btn btn-light border col-6 col-md-3">CE</button>
-        <button class="btn btn-light border col-6 col-md-3">C</button>
-        <button class="btn btn-light border col-6 col-md-3">←</button>
-        <button class="btn btn-light border col-6 col-md-3">÷</button>
-      </div>
+  <div class="row justify-content-center">
+    <!-- Botón para calcular el factorial, colocado fuera de la card -->
+    <div class="col-12 col-md-4 mb-3 text-center">
+      <!-- Al hacer clic en este botón, se calcula el factorial del número ingresado -->
+      <button class="btn btn-warning btn-lg" (click)="calculateFactorial()">n!</button>
+    </div>
 
-      <div class="row">
-        <button class="btn btn-light border col-4 col-md-3">7</button>
-        <button class="btn btn-light border col-4 col-md-3">8</button>
-        <button class="btn btn-light border col-4 col-md-3">9</button>
-        <button class="btn btn-light border col-4 col-md-3">×</button>
-      </div>
+    <!-- Inicia Card de la calculadora -->
+    <div class="col-12 col-md-6">
+      <div class="calculator card">
+        <div class="card-body">
+          <!-- Campo de entrada que muestra el valor actual en la calculadora -->
+          <input type="text" class="form-control mb-3 text-right" [value]="display" readonly />
 
-      <div class="row">
-        <button class="btn btn-light border col-4 col-md-3">4</button>
-        <button class="btn btn-light border col-4 col-md-3">5</button>
-        <button class="btn btn-light border col-4 col-md-3">6</button>
-        <button class="btn btn-light border col-4 col-md-3">-</button>
-      </div>
+          <!-- Fila de botones para operaciones especiales y divisiones -->
+          <div class="row">
+            <button class="btn btn-light border col-3" (click)="clearEntry()">CE</button>
+            <button class="btn btn-light border col-3" (click)="clear()">C</button>
+            <button class="btn btn-light border col-3" (click)="backspace()">←</button>
+            <button class="btn btn-light border col-3" (click)="setOperation('÷')">÷</button>
+          </div>
 
-      <div class="row">
-        <button class="btn btn-light border col-4 col-md-3">1</button>
-        <button class="btn btn-light border col-4 col-md-3">2</button>
-        <button class="btn btn-light border col-4 col-md-3">3</button>
-        <button class="btn btn-light border col-4 col-md-3">+</button>
-      </div>
+          <!-- Fila de botones para los números 7, 8, 9 y multiplicación -->
+          <div class="row">
+            <button class="btn btn-light border col-3" (click)="pressKey('7')">7</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('8')">8</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('9')">9</button>
+            <button class="btn btn-light border col-3" (click)="setOperation('×')">×</button>
+          </div>
 
-      <div class="row">
-        <button class="btn btn-light border col-4 col-md-3">0</button>
-        <button class="btn btn-light border col-4 col-md-3">.</button>
-        <button class="btn btn-primary col-8 col-md-6">=</button>
+          <!-- Fila de botones para los números 4, 5, 6 y resta -->
+          <div class="row">
+            <button class="btn btn-light border col-3" (click)="pressKey('4')">4</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('5')">5</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('6')">6</button>
+            <button class="btn btn-light border col-3" (click)="setOperation('-')">-</button>
+          </div>
+
+           <!-- Fila de botones para los números 1, 2, 3 y suma -->
+          <div class="row">
+            <button class="btn btn-light border col-3" (click)="pressKey('1')">1</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('2')">2</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('3')">3</button>
+            <button class="btn btn-light border col-3" (click)="setOperation('+')">+</button>
+          </div>
+
+           <!-- Fila de botones para el número 0, el punto decimal y el botón de igual -->
+          <div class="row">
+            <button class="btn btn-light border col-6" (click)="pressKey('0')">0</button>
+            <button class="btn btn-light border col-3" (click)="pressKey('.')">.</button>
+            <button class="btn btn-primary col-3" (click)="calculate()">=</button>
+          </div>
+        </div>
       </div>
+    </div>
+    <!-- Termina Card de la calculadora -->
+
+    <!-- Sección para mostrar el proceso de cálculo del factorial -->
+    <div *ngIf="factorialProcess" class="col-12 mt-3">
+      <h5>Proceso del cálculo del número factorial:</h5>
+      <!-- Muestra el proceso detallado del cálculo del factorial -->
+      <p>{{ factorialProcess }}</p>
     </div>
   </div>
 </div>
