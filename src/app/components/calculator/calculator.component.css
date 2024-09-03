@@ -1,0 +1,10 @@
+.calculator {
+    max-width: 300px;
+    margin: auto;
+  }
+  
+  button {
+    font-size: 1.5rem;
+    padding: 20px;
+  }
+  
